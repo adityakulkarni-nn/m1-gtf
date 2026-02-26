@@ -45,51 +45,6 @@ st.set_page_config(
 st.markdown("""
     <style>
     
-    .block-container {
-        
-        padding-top: 0.5rem !important;
-        padding-bottom: 0.5rem !important;
-    }
-    
-    /* Hide all scrollbars */
-    ::-webkit-scrollbar {
-        display: none !important;
-    }
-    
-    * {
-        -ms-overflow-style: none !important;
-        scrollbar-width: none !important;
-    }
-    
-    /* Compact header */
-    .main-header {
-        text-align: center;
-        padding: 0.5rem 0;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-radius: 10px;
-        margin-bottom: 1rem;
-    }
-    
-    .main-header h1 {
-        margin: 0;
-        font-size: 1.5rem;
-        line-height: 1.2;
-    }
-    
-    .main-header p {
-        margin: 0.2rem 0 0 0;
-        font-size: 0.85rem;
-        opacity: 0.9;
-    }
-    
-    .section-header {
-        background-color: #f0f2f6;
-        padding: 0.4rem 0.8rem;
-        border-radius: 5px;
-        border-left: 4px solid #667eea;
-        margin-bottom: 0.5rem;
-    }
     
     .section-header h3 {
         font-size: 1.1rem;
@@ -239,6 +194,7 @@ with col_output:
             value=f"{results['L']:.4f} mm",
             help="Distance to target (205 - D)"
         )
+
 
 
 
