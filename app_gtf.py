@@ -164,14 +164,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Title
-st.markdown("""
-    <div class="main-header">
-        <h1>🎯 M1 GTF Coordinate Calculator</h1>
-        <p>Stereotactic Frame Coordinate Computation</p>
-    </div>
-""", unsafe_allow_html=True)
-
 # Fixed z value for M1 Frame
 z = 100.0
 d_0 = 55.0
@@ -265,3 +257,4 @@ with col_output:
             value=f"{results['L']:.4f} mm",
             help="Distance to target (205 - D)"
         )
+
