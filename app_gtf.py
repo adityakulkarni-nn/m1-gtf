@@ -47,24 +47,20 @@ st.markdown("""
     /* Disable scrolling */
     html, body {
         overflow: hidden !important;
-        height: 100vh !important;
     }
     
     [data-testid="stAppViewContainer"], 
     [data-testid="stApp"] {
         overflow: hidden !important;
-        height: 100vh !important;
     }
     
     .main {
         overflow: hidden !important;
-        height: 100vh !important;
     }
     
     .block-container {
         overflow: hidden !important;
         max-height: 100vh !important;
-        height: 100vh !important;
         padding-top: 0.5rem !important;
         padding-bottom: 0.5rem !important;
     }
@@ -257,4 +253,5 @@ with col_output:
             value=f"{results['L']:.4f} mm",
             help="Distance to target (205 - D)"
         )
+
 
