@@ -44,23 +44,9 @@ st.set_page_config(
 # Custom CSS for better styling and no scrolling
 st.markdown("""
     <style>
-    /* Disable scrolling */
-    html, body {
-        overflow: hidden !important;
-    }
-    
-    [data-testid="stAppViewContainer"], 
-    [data-testid="stApp"] {
-        overflow: hidden !important;
-    }
-    
-    .main {
-        overflow: hidden !important;
-    }
     
     .block-container {
-        overflow: hidden !important;
-        max-height: 100vh !important;
+        
         padding-top: 0.5rem !important;
         padding-bottom: 0.5rem !important;
     }
@@ -253,5 +239,6 @@ with col_output:
             value=f"{results['L']:.4f} mm",
             help="Distance to target (205 - D)"
         )
+
 
 
