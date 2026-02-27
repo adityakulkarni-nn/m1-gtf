@@ -39,6 +39,54 @@ def compute_coordinates(x_gtf, y_gtf, z_gtf, arc_deg, collar_deg, z=100, d_0=55)
     }
 
 
+def compute_with_angles(x_gtf, y_gtf, z_gtf, arc_deg, collar_deg, z=100, d_0=55):
+    """
+    Compute coordinates based on GTF parameters with angles.
+
+    Args:
+        x_gtf, y_gtf, z_gtf: GTF coordinates
+        arc_deg: Arc angle in degrees
+        collar_deg: Collar angle in degrees
+        z: Fixed z value (default 100 for M1 Frame)
+        d_0: Initial distance (default 55)
+
+    Returns:
+        dict: Computed coordinates and distances
+    """
+    # Convert degrees to radians
+    arc_rad = math.radians(arc_deg)
+    collar_rad = math.radians(collar_deg)
+    arc1 = arc_deg
+    collar1 = collar_deg
+    D = d_0 - ((z_gtf - z) / math.sin(collar_rad))
+    delta_D = d_0 - D
+    x_new = x_gtf - (delta_D * math.cos(arc_rad))
+    if x_new <  50:
+        x_new = 50.0
+        arc1 = math.degrees(math.acos((x_gtf - x_new) / delta_D))
+    elif x_new > 150:
+        x_new = 150.0
+        arc1 = math.degrees(math.acos((x_gtf - x_new) / delta_D))
+
+    y_new = y_gtf + (delta_D * math.cos(collar_rad))
+    if y_new < 70:
+        y_new = 70.0
+        collar1 = math.degrees(math.acos((y_new - y_gtf) / delta_D))
+    elif y_new > 170:
+        y_new = 170.0
+        collar1 = math.degrees(math.acos((y_new - y_gtf) / delta_D))
+    z_new = z_gtf - (delta_D * math.sin(collar_rad))
+
+    return {
+        "x": x_new,
+        "y": y_new,
+        "z": z_new,
+        "D": D,
+        "L": 205 - D,
+        "ARC": arc1,
+        "COLLAR": collar1
+    }
+
 # Page config
 st.set_page_config(
     page_title="GTF Coordinate Calculator",
@@ -155,54 +203,130 @@ with col_output:
 
     # Compute results
     results = compute_coordinates(x_gtf, y_gtf, z_gtf, arc_deg, collar_deg, z, d_0)
+    results1 = compute_with_angles(x_gtf, y_gtf, z_gtf, arc_deg, collar_deg, z, d_0)
 
-    # Computed Coordinates
-    st.markdown("#### Computed Coordinates")
-    coord_col1, coord_col2, coord_col3 = st.columns(3)
+    # Create tabs for Normal and Free Angle modes
+    tab1, tab2 = st.tabs(["Normal", "Free Angle"])
 
-    with coord_col1:
-        st.metric(
-            label="X",
-            value=f"{results['x']:.4f}",
-            delta=f"{results['x'] - x_gtf:+.4f} mm",
-            help="Computed X coordinate"
-        )
+    with tab1:
+        # Computed Coordinates
+        st.markdown("#### Computed Coordinates")
+        coord_col1, coord_col2, coord_col3 = st.columns(3)
 
-    with coord_col2:
-        st.metric(
-            label="Y",
-            value=f"{results['y']:.4f}",
-            delta=f"{results['y'] - y_gtf:+.4f} mm",
-            help="Computed Y coordinate"
-        )
+        with coord_col1:
+            st.metric(
+                label="X",
+                value=f"{results['x']:.4f}",
+                delta=f"{results['x'] - x_gtf:+.4f} mm",
+                help="Computed X coordinate"
+            )
 
-    with coord_col3:
-        st.metric(
-            label="Z",
-            value=f"{results['z']:.4f}",
-            delta=f"{results['z'] - z_gtf:+.4f} mm",
-            help="Computed Z coordinate"
-        )
+        with coord_col2:
+            st.metric(
+                label="Y",
+                value=f"{results['y']:.4f}",
+                delta=f"{results['y'] - y_gtf:+.4f} mm",
+                help="Computed Y coordinate"
+            )
 
-    st.markdown("---")
+        with coord_col3:
+            st.metric(
+                label="Z",
+                value=f"{results['z']:.4f}",
+                delta=f"{results['z'] - z_gtf:+.4f} mm",
+                help="Computed Z coordinate"
+            )
 
-    # Distance Measurements
-    st.markdown("#### Distance Measurements")
-    dist_col1, dist_col2 = st.columns(2)
+        st.markdown("---")
 
-    with dist_col1:
-        st.metric(
-            label="D (Distance)",
-            value=f"{results['D']:.4f} mm",
-            help="Computed distance D"
-        )
+        # Distance Measurements
+        st.markdown("#### Distance Measurements")
+        dist_col1, dist_col2 = st.columns(2)
 
-    with dist_col2:
-        st.metric(
-            label="L (Target Distance)",
-            value=f"{results['L']:.4f} mm",
-            help="Distance to target (205 - D)"
-        )
+        with dist_col1:
+            st.metric(
+                label="D (Distance)",
+                value=f"{results['D']:.4f} mm",
+                help="Computed distance D"
+            )
+
+        with dist_col2:
+            st.metric(
+                label="L (Target Distance)",
+                value=f"{results['L']:.4f} mm",
+                help="Distance to target (205 - D)"
+            )
+
+    with tab2:
+        # Computed Coordinates
+        st.markdown("#### Computed Coordinates")
+        coord_col1, coord_col2, coord_col3 = st.columns(3)
+
+        with coord_col1:
+            st.metric(
+                label="X",
+                value=f"{results1['x']:.4f}",
+                delta=f"{results1['x'] - x_gtf:+.4f} mm",
+                help="Computed X coordinate"
+            )
+
+        with coord_col2:
+            st.metric(
+                label="Y",
+                value=f"{results1['y']:.4f}",
+                delta=f"{results1['y'] - y_gtf:+.4f} mm",
+                help="Computed Y coordinate"
+            )
+
+        with coord_col3:
+            st.metric(
+                label="Z",
+                value=f"{results1['z']:.4f}",
+                delta=f"{results1['z'] - z_gtf:+.4f} mm",
+                help="Computed Z coordinate"
+            )
+
+        st.markdown("---")
+
+        # Distance Measurements
+        st.markdown("#### Distance Measurements")
+        dist_col1, dist_col2 = st.columns(2)
+
+        with dist_col1:
+            st.metric(
+                label="D (Distance)",
+                value=f"{results1['D']:.4f} mm",
+                help="Computed distance D"
+            )
+
+        with dist_col2:
+            st.metric(
+                label="L (Target Distance)",
+                value=f"{results1['L']:.4f} mm",
+                help="Distance to target (205 - D)"
+            )
+
+        st.markdown("---")
+
+        # Adjusted Angles (only in Free Angle mode)
+        st.markdown("#### Adjusted Angles")
+        angle_col1, angle_col2 = st.columns(2)
+
+        with angle_col1:
+            st.metric(
+                label="Arc (Adjusted)",
+                value=f"{results1['ARC']:.4f}°",
+                delta=f"{results1['ARC'] - arc_deg:+.4f}°",
+                help="Adjusted Arc angle"
+            )
+
+        with angle_col2:
+            st.metric(
+                label="Collar (Adjusted)",
+                value=f"{results1['COLLAR']:.4f}°",
+                delta=f"{results1['COLLAR'] - collar_deg:+.4f}°",
+                help="Adjusted Collar angle"
+            )
 
     st.markdown("---")
 
