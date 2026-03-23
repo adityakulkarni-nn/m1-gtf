@@ -29,6 +29,8 @@ def compute_coordinates(x_gtf, y_gtf, z_gtf, arc_deg, collar_deg, z=100, d_0=55)
     x_new = x_gtf - (delta_D * math.cos(arc_rad))
     y_new = y_gtf + (delta_D * math.cos(collar_rad))
     z_new = z_gtf - (delta_D * math.sin(collar_rad))
+    z1 = z_gtf - (delta_D * math.sin(arc_rad))
+    print(f"Z: {z_new} ; {z1}")
 
     return {
         "x": x_new,
@@ -347,7 +349,7 @@ with col_output:
             # Get current time in Central timezone
             central_tz = pytz.timezone('America/Chicago')
             now = datetime.now(central_tz)
-            
+
             # Prepare data to append
             new_data = {
                 'Date': now.strftime('%Y-%m-%d'),
@@ -359,9 +361,9 @@ with col_output:
                 'Distance to Target': results['L'],
                 'Comment': comment if comment else ''
             }
-            
+
             excel_file = 'data.xlsx'
-            
+
             # Check if file exists
             if os.path.exists(excel_file):
                 # Read existing data
@@ -371,7 +373,7 @@ with col_output:
             else:
                 # Create new dataframe
                 df = pd.DataFrame([new_data])
-            
+
             # Sort by Date and Time in reverse chronological order (newest first)
             df['Date'] = pd.to_datetime(df['Date'])
             df = df.sort_values(by=['Date', 'Time'], ascending=[False, False]).reset_index(drop=True)
@@ -504,6 +506,7 @@ if 'show_modal' in st.session_state and st.session_state.show_modal:
 
     # Reset modal state after dialog is closed (X button or click outside)
     st.session_state.show_modal = False
+
 
 
 
