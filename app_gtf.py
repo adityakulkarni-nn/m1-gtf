@@ -29,8 +29,6 @@ def compute_coordinates(x_gtf, y_gtf, z_gtf, arc_deg, collar_deg, z=100, d_0=55)
     x_new = x_gtf - (delta_D * math.cos(arc_rad))
     y_new = y_gtf + (delta_D * math.cos(collar_rad))
     z_new = z_gtf - (delta_D * math.sin(collar_rad))
-    z1 = z_gtf - (delta_D * math.sin(arc_rad))
-    print(f"Z: {z_new} ; {z1}")
 
     return {
         "x": x_new,

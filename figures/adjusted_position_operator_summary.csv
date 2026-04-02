@@ -1,4 +1,0 @@
-operator,error_x_mean,error_x_std,error_x_median,error_x_count,error_y_mean,error_y_std,error_y_median,error_y_count,error_z_mean,error_z_std,error_z_median,error_z_count,total_error_mean,total_error_std,total_error_median,total_error_count
-AK,0.455,0.364,0.475,6,0.397,0.168,0.37,6,0.768,0.285,0.735,6,1.047,0.268,1.116,6
-CO,0.35,0.371,0.335,6,0.667,0.72,0.445,6,0.675,0.648,0.459,6,1.261,0.628,1.214,6
-MAH,0.375,0.395,0.245,6,0.608,0.4,0.485,6,0.794,0.636,0.642,6,1.22,0.552,1.286,6

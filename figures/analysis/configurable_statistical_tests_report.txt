@@ -1,0 +1,812 @@
+INPUT WORKBOOK
+- file: C:\NavineticsAI\tools\m1-gtf\figures\master_error.xlsx
+- sheet: adjusted_position
+  columns: target_id, x_0, y_0, z_0, side, collar, arc, distance_new, x_new, y_new, operator, trial, error_x, error_y, diff_distance, error_z, total_error
+- sheet: adapter
+  columns: target_id, x_0, y_0, z_0, side, collar, arc, operator, error_x, error_y, error_z, total_error
+- sheet: adapter_fig
+  columns: target_id, x_0, y_0, z_0, side, collar, arc, operator, error_x, error_y, error_z, total_error
+- sheet: comparison
+  columns: target_id, x_0, y_0, z_0, method, total_error, error_x, error_y, error_z
+
+====================================================================================================
+TEST: Adjusted-position total error by side
+Requested analysis: Two-sample t-test (pooled)
+Rows analyzed: 18
+Groups analyzed: 2
+Levels used: L, R
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 18 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.3047. Groups tested=2/2; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.2583 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested parametric test (Two-sample t-test (pooled)) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                            test_name              analysis_name        sheet_name factor      target subject levels  alpha statistic_name statistic p_value  n_used level_a level_b mean_a mean_b significant                                               notes
+Adjusted-position total error by side Two-sample t-test (pooled) adjusted_position   side total_error    None  L | R 0.0500              t   -0.7680  0.4537 18.0000       L       R 1.0869 1.2649       False Independent two-sample t-test with pooled variance.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+    L  9 1.0869 1.1434 0.3251 0.5710 1.4601    0.3074             0                0                        
+    R  9 1.2649 1.1895 0.6145 0.5986 2.3504    0.1655             1                0                        
+
+====================================================================================================
+TEST: Adjusted-position total error by arc
+Requested analysis: One-way ANOVA
+Rows analyzed: 18
+Groups analyzed: 4
+Levels used: 100, 105, 75, 80
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 18 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.1452. Groups tested=4/4; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.0622 using 4 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested parametric test (One-way ANOVA) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.2560 is not below alpha=0.05.
+ANALYSIS RESULT
+                           test_name analysis_name        sheet_name factor      target subject              levels  alpha statistic_name statistic p_value  n_used n_groups significant                    notes
+Adjusted-position total error by arc One-way ANOVA adjusted_position    arc total_error    None 100 | 105 | 75 | 80 0.0500              F    1.5072  0.2560 18.0000   4.0000       False Classical one-way ANOVA.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+  100  6 1.2803 1.3167 0.1503 1.0680 1.4601    0.6804             0                0                                                                              
+  105  3 0.7002 0.6339 0.1722 0.5710 0.8957    0.3504                                           IQR outlier screening is more stable with at least 4 observations.
+   75  3 1.0745 1.1636 0.2853 0.7554 1.3047    0.4772                                           IQR outlier screening is more stable with at least 4 observations.
+   80  6 1.3601 1.2371 0.7342 0.5986 2.3504    0.3322             0                0                                                                              
+
+====================================================================================================
+TEST: Adjusted-position total error by collar
+Requested analysis: Mann-Whitney (Wilcoxon rank-sum)
+Rows analyzed: 18
+Groups analyzed: 2
+Levels used: 75, 90
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 18 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): NO
+  Residual Shapiro-Wilk p=0.0290. Groups tested=2/2; non-normal groups=1; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.2399 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 1 evaluable groups.
+NEXT STEP
+- The requested analysis (Mann-Whitney (Wilcoxon rank-sum)) is non-parametric or variance-robust, but the assumption summary is still useful for interpretation.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                              test_name                    analysis_name        sheet_name factor      target subject  levels  alpha statistic_name statistic p_value  n_used level_a level_b median_a median_b significant                       notes
+Adjusted-position total error by collar Mann-Whitney (Wilcoxon rank-sum) adjusted_position collar total_error    None 75 | 90 0.0500              U   17.0000  0.5735 18.0000      75      90   1.1636   1.2673       False Mann-Whitney rank-sum test.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+   75 15 1.1581 1.1636 0.5280 0.5710 2.3504    0.0446             1                0                                                                              
+   90  3 1.2651 1.2673 0.1961 1.0680 1.4601    0.9817                                           IQR outlier screening is more stable with at least 4 observations.
+
+====================================================================================================
+TEST: Adjusted-position total error by target_id
+Requested analysis: Kruskal-Wallis
+Rows analyzed: 18
+Groups analyzed: 6
+Levels used: T1, T2, T3L, T3R, T4, T5
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 18 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): NO
+  Residual Shapiro-Wilk p=0.0861. Groups tested=6/6; non-normal groups=1; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.7606 using 6 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: REVIEW
+  No groups had enough observations for stable IQR outlier screening.
+NEXT STEP
+- The requested analysis (Kruskal-Wallis) is non-parametric or variance-robust, but the assumption summary is still useful for interpretation.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.2648 is not below alpha=0.05.
+ANALYSIS RESULT
+                                 test_name  analysis_name        sheet_name    factor      target subject                        levels  alpha statistic_name statistic p_value     df  n_used n_groups significant                        notes
+Adjusted-position total error by target_id Kruskal-Wallis adjusted_position target_id total_error    None T1 | T2 | T3L | T3R | T4 | T5 0.0500              H    6.4503  0.2648 5.0000 18.0000   6.0000       False Kruskal-Wallis omnibus test.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+   T1  3 1.2955 1.3662 0.1318 1.1434 1.3769    0.0778                                           IQR outlier screening is more stable with at least 4 observations.
+   T2  3 1.2651 1.2673 0.1961 1.0680 1.4601    0.9817                                           IQR outlier screening is more stable with at least 4 observations.
+  T3L  3 0.7002 0.6339 0.1722 0.5710 0.8957    0.3504                                           IQR outlier screening is more stable with at least 4 observations.
+  T3R  3 1.0745 1.1636 0.2853 0.7554 1.3047    0.4772                                           IQR outlier screening is more stable with at least 4 observations.
+   T4  3 1.5281 1.2847 0.5063 1.1895 2.1102    0.1798                                           IQR outlier screening is more stable with at least 4 observations.
+   T5  3 1.1920 0.6272 1.0032 0.5986 2.3504    0.0273                                           IQR outlier screening is more stable with at least 4 observations.
+
+====================================================================================================
+TEST: Adjusted-position total error by operator
+Requested analysis: One-way ANOVA
+Rows analyzed: 18
+Groups analyzed: 3
+Levels used: OP1, OP2, OP3
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 18 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.1154. Groups tested=3/3; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.4420 using 3 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 3 evaluable groups.
+NEXT STEP
+- The requested parametric test (One-way ANOVA) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.7443 is not below alpha=0.05.
+ANALYSIS RESULT
+                                test_name analysis_name        sheet_name   factor      target subject          levels  alpha statistic_name statistic p_value  n_used n_groups significant                    notes
+Adjusted-position total error by operator One-way ANOVA adjusted_position operator total_error    None OP1 | OP2 | OP3 0.0500              F    0.3012  0.7443 18.0000   3.0000       False Classical one-way ANOVA.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+  OP1  6 1.2200 1.2860 0.5516 0.6272 2.1102    0.3324             0                0                        
+  OP2  6 1.2608 1.2141 0.6281 0.5710 2.3504    0.5797             1                0                        
+  OP3  6 1.0469 1.1158 0.2684 0.5986 1.3662    0.7268             0                0                        
+
+====================================================================================================
+TEST: Adjusted-position error_x by side
+Requested analysis: Two-sample t-test (pooled)
+Rows analyzed: 18
+Groups analyzed: 2
+Levels used: L, R
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 15 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.2493. Groups tested=2/2; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.1189 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested parametric test (Two-sample t-test (pooled)) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                        test_name              analysis_name        sheet_name factor  target subject levels  alpha statistic_name statistic p_value  n_used level_a level_b mean_a mean_b significant                                               notes
+Adjusted-position error_x by side Two-sample t-test (pooled) adjusted_position   side error_x    None  L | R 0.0500              t    1.5053  0.1517 18.0000       L       R 0.5156 0.2711       False Independent two-sample t-test with pooled variance.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+    L  9 0.5156 0.4600 0.4156 0.0000 1.0400    0.1897             0                0                        
+    R  9 0.2711 0.2900 0.2542 0.0000 0.7200    0.3360             0                0                        
+
+====================================================================================================
+TEST: Adjusted-position error_x by arc
+Requested analysis: One-way ANOVA
+Rows analyzed: 18
+Groups analyzed: 4
+Levels used: 100, 105, 75, 80
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 15 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.7410. Groups tested=4/4; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.1162 using 4 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested parametric test (One-way ANOVA) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.2574 is not below alpha=0.05.
+ANALYSIS RESULT
+                       test_name analysis_name        sheet_name factor  target subject              levels  alpha statistic_name statistic p_value  n_used n_groups significant                    notes
+Adjusted-position error_x by arc One-way ANOVA adjusted_position    arc error_x    None 100 | 105 | 75 | 80 0.0500              F    1.5016  0.2574 18.0000   4.0000       False Classical one-way ANOVA.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+  100  6 0.6167 0.7250 0.4586 0.0000 1.0400    0.1439             0                0                                                                              
+  105  3 0.3133 0.3000 0.2702 0.0500 0.5900    0.9184                                           IQR outlier screening is more stable with at least 4 observations.
+   75  3 0.4000 0.4200 0.1015 0.2900 0.4900    0.6725                                           IQR outlier screening is more stable with at least 4 observations.
+   80  6 0.2067 0.0750 0.2904 0.0000 0.7200    0.0566             0                0                                                                              
+
+====================================================================================================
+TEST: Adjusted-position error_x by collar
+Requested analysis: Two-sample t-test (pooled)
+Rows analyzed: 18
+Groups analyzed: 2
+Levels used: 75, 90
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 15 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.1278. Groups tested=2/2; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.2931 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 1 evaluable groups.
+NEXT STEP
+- The requested parametric test (Two-sample t-test (pooled)) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                          test_name              analysis_name        sheet_name factor  target subject  levels  alpha statistic_name statistic p_value  n_used level_a level_b mean_a mean_b significant                                               notes
+Adjusted-position error_x by collar Two-sample t-test (pooled) adjusted_position collar error_x    None 75 | 90 0.0500              t    0.9167  0.3729 18.0000      75      90 0.4280 0.2200       False Independent two-sample t-test with pooled variance.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+   75 15 0.4280 0.3700 0.3735 0.0000 1.0400    0.0899             0                0                                                                              
+   90  3 0.2200 0.2000 0.2307 0.0000 0.4600    0.8564                                           IQR outlier screening is more stable with at least 4 observations.
+
+====================================================================================================
+TEST: Adjusted-position error_x by target_id
+Requested analysis: Kruskal-Wallis
+Rows analyzed: 18
+Groups analyzed: 6
+Levels used: T1, T2, T3L, T3R, T4, T5
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 15 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): NO
+  Residual Shapiro-Wilk p=0.3870. Groups tested=6/6; non-normal groups=1; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.6749 using 6 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: REVIEW
+  No groups had enough observations for stable IQR outlier screening.
+NEXT STEP
+- The requested analysis (Kruskal-Wallis) is non-parametric or variance-robust, but the assumption summary is still useful for interpretation.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.1029 is not below alpha=0.05.
+ANALYSIS RESULT
+                             test_name  analysis_name        sheet_name    factor  target subject                        levels  alpha statistic_name statistic p_value     df  n_used n_groups significant                        notes
+Adjusted-position error_x by target_id Kruskal-Wallis adjusted_position target_id error_x    None T1 | T2 | T3L | T3R | T4 | T5 0.0500              H    9.1588  0.1029 5.0000 18.0000   6.0000       False Kruskal-Wallis omnibus test.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+   T1  3 1.0133 1.0100 0.0252 0.9900 1.0400    0.7804                                           IQR outlier screening is more stable with at least 4 observations.
+   T2  3 0.2200 0.2000 0.2307 0.0000 0.4600    0.8564                                           IQR outlier screening is more stable with at least 4 observations.
+  T3L  3 0.3133 0.3000 0.2702 0.0500 0.5900    0.9184                                           IQR outlier screening is more stable with at least 4 observations.
+  T3R  3 0.4000 0.4200 0.1015 0.2900 0.4900    0.6725                                           IQR outlier screening is more stable with at least 4 observations.
+   T4  3 0.2900 0.1500 0.3799 0.0000 0.7200    0.3796                                           IQR outlier screening is more stable with at least 4 observations.
+   T5  3 0.1233 0.0000 0.2136 0.0000 0.3700    0.0000                                           IQR outlier screening is more stable with at least 4 observations.
+
+====================================================================================================
+TEST: Adjusted-position error_x by operator
+Requested analysis: One-way ANOVA
+Rows analyzed: 18
+Groups analyzed: 3
+Levels used: OP1, OP2, OP3
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 15 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.0663. Groups tested=3/3; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.9499 using 3 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 3 evaluable groups.
+NEXT STEP
+- The requested parametric test (One-way ANOVA) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.8817 is not below alpha=0.05.
+ANALYSIS RESULT
+                            test_name analysis_name        sheet_name   factor  target subject          levels  alpha statistic_name statistic p_value  n_used n_groups significant                    notes
+Adjusted-position error_x by operator One-way ANOVA adjusted_position operator error_x    None OP1 | OP2 | OP3 0.0500              F    0.1270  0.8817 18.0000   3.0000       False Classical one-way ANOVA.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+  OP1  6 0.3750 0.2450 0.3953 0.0000 0.9900    0.3034             0                0                        
+  OP2  6 0.3500 0.3350 0.3711 0.0000 1.0100    0.2225             1                0                        
+  OP3  6 0.4550 0.4750 0.3638 0.0000 1.0400    0.7783             0                0                        
+
+====================================================================================================
+TEST: Adjusted-position error_y by side
+Requested analysis: Mann-Whitney (Wilcoxon rank-sum)
+Rows analyzed: 18
+Groups analyzed: 2
+Levels used: L, R
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 14 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): NO
+  Residual Shapiro-Wilk p=0.0020. Groups tested=2/2; non-normal groups=2; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.6027 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: REVIEW
+  Extreme Tukey outliers were detected: total=1; affected groups=R.
+NEXT STEP
+- The requested analysis (Mann-Whitney (Wilcoxon rank-sum)) is non-parametric or variance-robust, but the assumption summary is still useful for interpretation.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                        test_name                    analysis_name        sheet_name factor  target subject levels  alpha statistic_name statistic p_value  n_used level_a level_b median_a median_b significant                       notes
+Adjusted-position error_y by side Mann-Whitney (Wilcoxon rank-sum) adjusted_position   side error_y    None  L | R 0.0500              U   61.0000  0.0768 18.0000       L       R   0.5000   0.3400       False Mann-Whitney rank-sum test.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+    L  9 0.6678 0.5000 0.4030 0.3700 1.4600    0.0036             2                0                        
+    R  9 0.4467 0.3400 0.5307 0.0000 1.6500    0.0263             1                1                        
+
+====================================================================================================
+TEST: Adjusted-position error_y by arc
+Requested analysis: One-way ANOVA
+Rows analyzed: 18
+Groups analyzed: 4
+Levels used: 100, 105, 75, 80
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 14 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.1250. Groups tested=4/4; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.3394 using 4 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested parametric test (One-way ANOVA) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.2266 is not below alpha=0.05.
+ANALYSIS RESULT
+                       test_name analysis_name        sheet_name factor  target subject              levels  alpha statistic_name statistic p_value  n_used n_groups significant                    notes
+Adjusted-position error_y by arc One-way ANOVA adjusted_position    arc error_y    None 100 | 105 | 75 | 80 0.0500              F    1.6337  0.2266 18.0000   4.0000       False Classical one-way ANOVA.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+  100  6 0.7750 0.5850 0.4661 0.3700 1.4600    0.1272             0                0                                                                              
+  105  3 0.4533 0.4700 0.0569 0.3900 0.5000    0.5098                                           IQR outlier screening is more stable with at least 4 observations.
+   75  3 0.0967 0.1300 0.0850 0.0000 0.1600    0.3386                                           IQR outlier screening is more stable with at least 4 observations.
+   80  6 0.6217 0.4200 0.5809 0.0000 1.6500    0.3303             1                0                                                                              
+
+====================================================================================================
+TEST: Adjusted-position error_y by collar
+Requested analysis: Mann-Whitney (Wilcoxon rank-sum)
+Rows analyzed: 18
+Groups analyzed: 2
+Levels used: 75, 90
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 14 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): NO
+  Residual Shapiro-Wilk p=0.1052. Groups tested=2/2; non-normal groups=1; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.6092 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: REVIEW
+  Extreme Tukey outliers were detected: total=1; affected groups=75.
+NEXT STEP
+- The requested analysis (Mann-Whitney (Wilcoxon rank-sum)) is non-parametric or variance-robust, but the assumption summary is still useful for interpretation.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                          test_name                    analysis_name        sheet_name factor  target subject  levels  alpha statistic_name statistic p_value  n_used level_a level_b median_a median_b significant                       notes
+Adjusted-position error_y by collar Mann-Whitney (Wilcoxon rank-sum) adjusted_position collar error_y    None 75 | 90 0.0500              U   11.5000  0.2126 18.0000      75      90   0.4000   1.2500       False Mann-Whitney rank-sum test.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+   75 15 0.4633 0.4000 0.4062 0.0000 1.6500    0.0076             2                1                                                                              
+   90  3 1.0267 1.2500 0.5783 0.3700 1.4600    0.3487                                           IQR outlier screening is more stable with at least 4 observations.
+
+====================================================================================================
+TEST: Adjusted-position error_y by target_id
+Requested analysis: One-way ANOVA
+Rows analyzed: 18
+Groups analyzed: 6
+Levels used: T1, T2, T3L, T3R, T4, T5
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 14 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.6633. Groups tested=6/6; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.5939 using 6 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: REVIEW
+  No groups had enough observations for stable IQR outlier screening.
+NEXT STEP
+- Some parametric assumptions look weak. Compare with a robust or non-parametric alternative.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.1965 is not below alpha=0.05.
+ANALYSIS RESULT
+                             test_name analysis_name        sheet_name    factor  target subject                        levels  alpha statistic_name statistic p_value  n_used n_groups significant                    notes
+Adjusted-position error_y by target_id One-way ANOVA adjusted_position target_id error_y    None T1 | T2 | T3L | T3R | T4 | T5 0.0500              F    1.7566  0.1965 18.0000   6.0000       False Classical one-way ANOVA.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+   T1  3 0.5233 0.5000 0.1365 0.4000 0.6700    0.7162                                           IQR outlier screening is more stable with at least 4 observations.
+   T2  3 1.0267 1.2500 0.5783 0.3700 1.4600    0.3487                                           IQR outlier screening is more stable with at least 4 observations.
+  T3L  3 0.4533 0.4700 0.0569 0.3900 0.5000    0.5098                                           IQR outlier screening is more stable with at least 4 observations.
+  T3R  3 0.0967 0.1300 0.0850 0.0000 0.1600    0.3386                                           IQR outlier screening is more stable with at least 4 observations.
+   T4  3 0.4233 0.3700 0.4524 0.0000 0.9000    0.8047                                           IQR outlier screening is more stable with at least 4 observations.
+   T5  3 0.8200 0.4700 0.7217 0.3400 1.6500    0.1722                                           IQR outlier screening is more stable with at least 4 observations.
+
+====================================================================================================
+TEST: Adjusted-position error_y by operator
+Requested analysis: One-way ANOVA
+Rows analyzed: 18
+Groups analyzed: 3
+Levels used: OP1, OP2, OP3
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 14 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.2194. Groups tested=3/3; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.1131 using 3 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 3 evaluable groups.
+NEXT STEP
+- The requested parametric test (One-way ANOVA) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.6079 is not below alpha=0.05.
+ANALYSIS RESULT
+                            test_name analysis_name        sheet_name   factor  target subject          levels  alpha statistic_name statistic p_value  n_used n_groups significant                    notes
+Adjusted-position error_y by operator One-way ANOVA adjusted_position operator error_y    None OP1 | OP2 | OP3 0.0500              F    0.5146  0.6079 18.0000   3.0000       False Classical one-way ANOVA.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+  OP1  6 0.6083 0.4850 0.4000 0.1300 1.2500    0.5908             0                0                        
+  OP2  6 0.6667 0.4450 0.7197 0.0000 1.6500    0.1471             0                0                        
+  OP3  6 0.3967 0.3700 0.1678 0.1600 0.6700    0.6882             2                0                        
+
+====================================================================================================
+TEST: Adjusted-position diff_distance by side
+Requested analysis: Two-sample t-test (pooled)
+Rows analyzed: 18
+Groups analyzed: 2
+Levels used: L, R
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 18 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.8681. Groups tested=2/2; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.2598 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested parametric test (Two-sample t-test (pooled)) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                              test_name              analysis_name        sheet_name factor        target subject levels  alpha statistic_name statistic p_value  n_used level_a level_b mean_a mean_b significant                                               notes
+Adjusted-position diff_distance by side Two-sample t-test (pooled) adjusted_position   side diff_distance    None  L | R 0.0500              t   -3.4344  0.0034 18.0000       L       R 0.4300 1.1100        True Independent two-sample t-test with pooled variance.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+    L  9 0.4300 0.4000 0.3244 0.0200 0.9000    0.4927             0                0                        
+    R  9 1.1100 1.1600 0.4976 0.4300 1.8300    0.5667             0                0                        
+
+====================================================================================================
+TEST: Adjusted-position diff_distance by arc
+Requested analysis: One-way ANOVA
+Rows analyzed: 18
+Groups analyzed: 4
+Levels used: 100, 105, 75, 80
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 18 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.8329. Groups tested=4/4; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.1181 using 4 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested parametric test (One-way ANOVA) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- Post-hoc run: Tukey HSD after significant one-way ANOVA.
+ANALYSIS RESULT
+                             test_name analysis_name        sheet_name factor        target subject              levels  alpha statistic_name statistic p_value  n_used n_groups significant                    notes
+Adjusted-position diff_distance by arc One-way ANOVA adjusted_position    arc diff_distance    None 100 | 105 | 75 | 80 0.0500              F    3.5748  0.0416 18.0000   4.0000        True Classical one-way ANOVA.
+POST-HOC RESULT
+                             test_name analysis_name        sheet_name factor        target subject posthoc_method group1 group2 meandiff  p_adj   lower  upper significant
+Adjusted-position diff_distance by arc One-way ANOVA adjusted_position    arc diff_distance    None      Tukey HSD    100    105  -0.0450 0.9989 -0.9603 0.8703       False
+Adjusted-position diff_distance by arc One-way ANOVA adjusted_position    arc diff_distance    None      Tukey HSD    100     75   0.5683 0.3117 -0.3469 1.4836       False
+Adjusted-position diff_distance by arc One-way ANOVA adjusted_position    arc diff_distance    None      Tukey HSD    100     80   0.7133 0.0636 -0.0340 1.4606       False
+Adjusted-position diff_distance by arc One-way ANOVA adjusted_position    arc diff_distance    None      Tukey HSD    105     75   0.6133 0.3662 -0.4435 1.6702       False
+Adjusted-position diff_distance by arc One-way ANOVA adjusted_position    arc diff_distance    None      Tukey HSD    105     80   0.7583 0.1210 -0.1569 1.6736       False
+Adjusted-position diff_distance by arc One-way ANOVA adjusted_position    arc diff_distance    None      Tukey HSD     75     80   0.1450 0.9664 -0.7703 1.0603       False
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+  100  6 0.4450 0.4000 0.4045 0.0200 0.9000    0.1591             0                0                                                                              
+  105  3 0.4000 0.4000 0.1000 0.3000 0.5000    1.0000                                           IQR outlier screening is more stable with at least 4 observations.
+   75  3 1.0133 1.0800 0.3350 0.6500 1.3100    0.6692                                           IQR outlier screening is more stable with at least 4 observations.
+   80  6 1.1583 1.2450 0.5855 0.4300 1.8300    0.4127             0                0                                                                              
+
+====================================================================================================
+TEST: Adjusted-position diff_distance by collar
+Requested analysis: Two-sample t-test (pooled)
+Rows analyzed: 18
+Groups analyzed: 2
+Levels used: 75, 90
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 18 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.1146. Groups tested=2/2; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.5670 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 1 evaluable groups.
+NEXT STEP
+- The requested parametric test (Two-sample t-test (pooled)) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                                test_name              analysis_name        sheet_name factor        target subject  levels  alpha statistic_name statistic p_value  n_used level_a level_b mean_a mean_b significant                                               notes
+Adjusted-position diff_distance by collar Two-sample t-test (pooled) adjusted_position collar diff_distance    None 75 | 90 0.0500              t    1.6571  0.1170 18.0000      75      90 0.8593 0.3233       False Independent two-sample t-test with pooled variance.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+   75 15 0.8593 0.6500 0.5143 0.2000 1.8300    0.2162             0                0                                                                              
+   90  3 0.3233 0.0600 0.4912 0.0200 0.8900    0.0778                                           IQR outlier screening is more stable with at least 4 observations.
+
+====================================================================================================
+TEST: Adjusted-position diff_distance by target_id
+Requested analysis: One-way ANOVA
+Rows analyzed: 18
+Groups analyzed: 6
+Levels used: T1, T2, T3L, T3R, T4, T5
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 18 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.1613. Groups tested=6/6; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.9088 using 6 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: REVIEW
+  No groups had enough observations for stable IQR outlier screening.
+NEXT STEP
+- Some parametric assumptions look weak. Compare with a robust or non-parametric alternative.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.0595 is not below alpha=0.05.
+ANALYSIS RESULT
+                                   test_name analysis_name        sheet_name    factor        target subject                        levels  alpha statistic_name statistic p_value  n_used n_groups significant                    notes
+Adjusted-position diff_distance by target_id One-way ANOVA adjusted_position target_id diff_distance    None T1 | T2 | T3L | T3R | T4 | T5 0.0500              F    2.9209  0.0595 18.0000   6.0000       False Classical one-way ANOVA.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note                                                       outlier_note
+   T1  3 0.5667 0.6000 0.3512 0.2000 0.9000    0.8428                                           IQR outlier screening is more stable with at least 4 observations.
+   T2  3 0.3233 0.0600 0.4912 0.0200 0.8900    0.0778                                           IQR outlier screening is more stable with at least 4 observations.
+  T3L  3 0.4000 0.4000 0.1000 0.3000 0.5000    1.0000                                           IQR outlier screening is more stable with at least 4 observations.
+  T3R  3 1.0133 1.0800 0.3350 0.6500 1.3100    0.6692                                           IQR outlier screening is more stable with at least 4 observations.
+   T4  3 1.4400 1.3300 0.3483 1.1600 1.8300    0.4709                                           IQR outlier screening is more stable with at least 4 observations.
+   T5  3 0.8767 0.5100 0.7055 0.4300 1.6900    0.1083                                           IQR outlier screening is more stable with at least 4 observations.
+
+====================================================================================================
+TEST: Adjusted-position diff_distance by operator
+Requested analysis: One-way ANOVA
+Rows analyzed: 18
+Groups analyzed: 3
+Levels used: OP1, OP2, OP3
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 18 usable observations and 18 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, operator, trial.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.3026. Groups tested=3/3; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.2850 using 3 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 3 evaluable groups.
+NEXT STEP
+- The requested parametric test (One-way ANOVA) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- Post-hoc analysis skipped because omnibus p=0.9271 is not below alpha=0.05.
+ANALYSIS RESULT
+                                  test_name analysis_name        sheet_name   factor        target subject          levels  alpha statistic_name statistic p_value  n_used n_groups significant                    notes
+Adjusted-position diff_distance by operator One-way ANOVA adjusted_position operator diff_distance    None OP1 | OP2 | OP3 0.0500              F    0.0761  0.9271 18.0000   3.0000       False Classical one-way ANOVA.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+  OP1  6 0.8217 0.6650 0.6592 0.0600 1.8300    0.7221             0                0                        
+  OP2  6 0.6983 0.4750 0.6711 0.0200 1.6900    0.3609             0                0                        
+  OP3  6 0.7900 0.7450 0.2931 0.5000 1.1600    0.2109             0                0                        
+
+====================================================================================================
+TEST: Comparison sheet paired total error by method
+Requested analysis: Paired t-test
+Rows analyzed: 30
+Groups analyzed: 2
+Levels used: adapter, adjusted
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 30 usable observations and 30 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, method.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.1568. Groups tested=2/2; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.6191 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested parametric test (Paired t-test) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                                    test_name analysis_name sheet_name factor      target   subject             levels  alpha subjects_before_complete_case subjects_used_in_analysis subjects_dropped_incomplete duplicate_subject_factor_cells statistic_name statistic p_value     df n_used level_a  level_b mean_difference difference_shapiro_w difference_shapiro_p difference_normal significant                                    notes
+Comparison sheet paired total error by method Paired t-test comparison method total_error target_id adapter | adjusted 0.0500                        5.0000                    5.0000                      0.0000                        10.0000              t    3.3042  0.0298 4.0000 5.0000 adapter adjusted          0.3752               0.7834               0.0589              True        True Paired t-test on complete-case subjects.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+   group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+ adapter 15 1.5272 1.6157 0.5939 0.6403 2.4872    0.3764             0                0                        
+adjusted 15 1.1520 1.1636 0.5293 0.5710 2.3504    0.0502             1                0                        
+
+====================================================================================================
+TEST: Comparison sheet paired error_x by method
+Requested analysis: Paired t-test
+Rows analyzed: 30
+Groups analyzed: 2
+Levels used: adapter, adjusted
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 30 usable observations and 24 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, method.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.7374. Groups tested=2/2; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.3141 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested parametric test (Paired t-test) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                                test_name analysis_name sheet_name factor  target   subject             levels  alpha subjects_before_complete_case subjects_used_in_analysis subjects_dropped_incomplete duplicate_subject_factor_cells statistic_name statistic p_value     df n_used level_a  level_b mean_difference difference_shapiro_w difference_shapiro_p difference_normal significant                                    notes
+Comparison sheet paired error_x by method Paired t-test comparison method error_x target_id adapter | adjusted 0.0500                        5.0000                    5.0000                      0.0000                        10.0000              t    3.8496  0.0183 4.0000 5.0000 adapter adjusted          0.4000               0.9141               0.4924              True        True Paired t-test on complete-case subjects.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+   group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+ adapter 15 0.6693 0.6300 0.3200 0.0000 1.1900    0.7679             0                0                        
+adjusted 15 0.2693 0.2900 0.2364 0.0000 0.7200    0.1904             0                0                        
+
+====================================================================================================
+TEST: Comparison sheet paired error_y by method
+Requested analysis: Wilcoxon signed-rank
+Rows analyzed: 30
+Groups analyzed: 2
+Levels used: adapter, adjusted
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 30 usable observations and 26 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, method.
+- Within-group distributions are roughly normal (or residuals are): NO
+  Residual Shapiro-Wilk p=0.0251. Groups tested=2/2; non-normal groups=1; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.8491 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested analysis (Wilcoxon signed-rank) is non-parametric or variance-robust, but the assumption summary is still useful for interpretation.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                                test_name        analysis_name sheet_name factor  target   subject             levels  alpha subjects_before_complete_case subjects_used_in_analysis subjects_dropped_incomplete duplicate_subject_factor_cells statistic_name statistic p_value n_used level_a  level_b median_difference significant                                                notes
+Comparison sheet paired error_y by method Wilcoxon signed-rank comparison method error_y target_id adapter | adjusted 0.0500                        5.0000                    5.0000                      0.0000                        10.0000              W    0.0000  0.0625 5.0000 adapter adjusted            0.5100       False Wilcoxon signed-rank test on complete-case subjects.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+   group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+ adapter 15 1.0700 0.9400 0.5138 0.2000 1.9200    0.4176             0                0                        
+adjusted 15 0.5640 0.3900 0.5162 0.0000 1.6500    0.0201             2                0                        
+
+====================================================================================================
+TEST: Comparison sheet paired error_z by method
+Requested analysis: Paired t-test
+Rows analyzed: 30
+Groups analyzed: 2
+Levels used: adapter, adjusted
+Alpha: 0.05
+ASSUMPTION CHECKS
+- DV is continuous (interval/ratio): LIKELY YES
+  The target column is numeric with 30 usable observations and 29 unique values, which is compatible with a continuous DV.
+- Observations are independent: MANUAL CHECK
+  Independence is a design assumption and cannot be verified automatically here. Relevant identifier columns present: target_id, method.
+- Within-group distributions are roughly normal (or residuals are): YES
+  Residual Shapiro-Wilk p=0.1479. Groups tested=2/2; non-normal groups=0; insufficient-n groups=0.
+- Group variances are similar: YES
+  Brown-Forsythe/Levene p=0.4605 using 2 groups with n>=2. Variances look similar.
+- No extreme outliers dominate the groups: YES
+  No extreme Tukey outliers were detected in 2 evaluable groups.
+NEXT STEP
+- The requested parametric test (Paired t-test) is reasonably supported if the design assumption is appropriate.
+POST-HOC NOTE
+- No omnibus post-hoc analysis is defined for this requested test.
+ANALYSIS RESULT
+                                test_name analysis_name sheet_name factor  target   subject             levels  alpha subjects_before_complete_case subjects_used_in_analysis subjects_dropped_incomplete duplicate_subject_factor_cells statistic_name statistic p_value     df n_used level_a  level_b mean_difference difference_shapiro_w difference_shapiro_p difference_normal significant                                    notes
+Comparison sheet paired error_z by method Paired t-test comparison method error_z target_id adapter | adjusted 0.0500                        5.0000                    5.0000                      0.0000                        10.0000              t   -0.1729  0.8711 4.0000 5.0000 adapter adjusted         -0.0439               0.9838               0.9539              True       False Paired t-test on complete-case subjects.
+POST-HOC RESULT
+- No post-hoc result.
+GROUP DIAGNOSTICS
+   group  n   mean median    std    min    max shapiro_p mild_outliers extreme_outliers group_note outlier_note
+ adapter 15 0.7413 0.6800 0.4357 0.1000 1.3000    0.0930             0                0                        
+adjusted 15 0.7852 0.6279 0.5482 0.0200 1.7676    0.4682             0                0                        

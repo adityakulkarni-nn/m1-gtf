@@ -1,0 +1,4 @@
+operator,error_x_mean,error_x_std,error_x_median,error_x_count,error_y_mean,error_y_std,error_y_median,error_y_count,error_z_mean,error_z_std,error_z_median,error_z_count,total_error_mean,total_error_std,total_error_median,total_error_count
+OP1,0.652,0.302,0.63,5,1.196,0.634,1.38,5,0.776,0.342,0.68,5,1.626,0.616,1.652,5
+OP2,0.622,0.451,0.55,5,1.098,0.685,0.8,5,0.678,0.527,0.47,5,1.499,0.842,1.509,5
+OP3,0.734,0.234,0.78,5,0.916,0.044,0.9,5,0.77,0.512,1.08,5,1.458,0.357,1.616,5
