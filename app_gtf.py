@@ -24,11 +24,11 @@ def compute_coordinates(x_gtf, y_gtf, z_gtf, arc_deg, collar_deg, z=100, d_0=55)
     arc_rad = math.radians(arc_deg)
     collar_rad = math.radians(collar_deg)
 
-    D = d_0 - ((z_gtf - z) / math.sin(collar_rad))
+    D = d_0 - (( z - z_gtf) / math.sin(collar_rad))
     delta_D = d_0 - D
-    x_new = x_gtf - (delta_D * math.cos(arc_rad))
-    y_new = y_gtf + (delta_D * math.cos(collar_rad))
-    z_new = z_gtf - (delta_D * math.sin(collar_rad))
+    x_new = x_gtf + (delta_D * math.cos(arc_rad))
+    y_new = y_gtf - (delta_D * math.cos(collar_rad))
+    z_new = z_gtf + (delta_D * math.sin(collar_rad))
 
     return {
         "x": x_new,
